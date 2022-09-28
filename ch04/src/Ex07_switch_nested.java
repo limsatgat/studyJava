@@ -6,6 +6,7 @@ public class Ex07_switch_nested {
         System.out.print("당신의 주민번호를 예시처럼 입력하세요. (011231-1111222) : ");
 
         Scanner scanner = new Scanner(System.in);
+        // reg : 등록(registration)
         String regNo = scanner.nextLine();
         char gender = regNo.charAt(7);
 
