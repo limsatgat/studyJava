@@ -19,5 +19,12 @@ public class Ex02_If {
             System.out.println("입력하신 숫자는 0이 아닙니다.");
             System.out.printf("입력하신 숫자는 %d입니다.", input);
          }
+
+//        if(input == 0){
+//            System.out.println("입력하시는 숫자는 0입니다.");
+//        } else {
+//            System.out.println("입력하신 숫자는 0이 아닙니다.");
+//            System.out.printf("입력하신 숫자는 %d입니다.", input);
+//        }
     }
 }
