@@ -13,6 +13,7 @@ public class Ex05_If_else_nested {
 
         System.out.printf("당신의 점수는 %d입니다.%n", score);
 
+        // 입력한 숫자가 조건문에서 속하지 않으면 뒷문장에 0이 덧대어 출력
         if (score >= 90) {
             grade = 'A';
             if (score >= 98) {
