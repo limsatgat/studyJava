@@ -1,7 +1,6 @@
 public class Ex02_ArrayLengthChange {
-    public Ex02_ArrayLengthChange() {
-    }
 
+    // 배열의 길이 변경
     public static void main(String[] args) {
         int[] arr = new int[5];
 

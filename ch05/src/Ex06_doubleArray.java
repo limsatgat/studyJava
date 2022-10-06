@@ -1,7 +1,6 @@
 public class Ex06_doubleArray {
-    public Ex06_doubleArray() {
-    }
 
+    // 2차원 배열
     public static void main(String[] args) {
         int[][] score = new int[][]{{100, 100, 100}, {20, 20, 20}, {30, 30, 30}, {40, 40, 40}};
         int sum = 0;

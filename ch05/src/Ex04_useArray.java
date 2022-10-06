@@ -1,7 +1,6 @@
 public class Ex04_useArray {
-    public Ex04_useArray() {
-    }
 
+    // 배열 활용하기
     public static void main(String[] args) {
         int sum = 0;
         float average = 0.0F;

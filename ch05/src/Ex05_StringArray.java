@@ -1,6 +1,4 @@
 public class Ex05_StringArray {
-    public Ex05_StringArray() {
-    }
 
     public static void main(String[] args) {
         String[] names = new String[]{"Lim", "Soo", "Heon"};
