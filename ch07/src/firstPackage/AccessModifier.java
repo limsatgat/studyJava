@@ -18,7 +18,7 @@ public class AccessModifier {
 class ModifierOrigin {
     public static void main(String[] args) {
         AccessModifier am = new AccessModifier();
-        System.out.println(am.privateData);
+//        System.out.println(am.privateData);
         System.out.println(am.defaultData);
         System.out.println(am.protectedData);
         System.out.println(am.publicData);

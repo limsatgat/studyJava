@@ -14,9 +14,14 @@ class Bluetooth { // 포함
     }
 }
 
+//class Mouse {
+//    Computer com = new Computer();
+//}
+
 public class Ex02_Computer {
     public static void main(String[] args) {
         Bluetooth buds = new Bluetooth();    // 블루투스 객체 생성
+//        Mouse mo = new Mouse();
 
         buds.com.power = false;   // 조상으로부터 상속받은 멤버
         if (buds.com.power) {
@@ -27,6 +32,9 @@ public class Ex02_Computer {
 
         buds.pairing = false;     // 알림 켜기
         buds.pairingBluetooth("버즈가 연결되었습니다.");
+
+//        System.out.println(buds.com.toString());
+//        System.out.println(mo.com.toString());
     }
 }
 

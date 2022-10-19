@@ -20,7 +20,7 @@ final class FinalModifier {
 
     final void getMaxSize() {
         final int localVar = MAX_SIZE;
-        localVar = 20;
+//        localVar = 20;
     }
 }
 
@@ -33,7 +33,7 @@ abstract class AbstractModifier {    // 추상클래스
 
 public class Ex06_modifier {
     public static void main(String[] args) {
-        AbstractModifier a = new AbstractModifier();    // 인스턴스 생성불가
+//        AbstractModifier a = new AbstractModifier();    // 인스턴스 생성불가
 
     }
 }
