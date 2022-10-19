@@ -2,9 +2,9 @@ public class Ex02_ArrayLengthChange {
 
     // 배열의 길이 변경
     public static void main(String[] args) {
-        int[] arr = new int[5];
+        int[] arr = new int[4];
 
-        for(int i = 0; i < arr.length; ++i) {
+        for(int i = 0; i < 5; ++i) {
             arr[i] = i + 1;
         }
 

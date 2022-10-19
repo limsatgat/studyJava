@@ -1,6 +1,6 @@
 // 인스턴스의 생성과 사용
 public class Ex01_Instance {
-
+    // 객체의 기능과 속성
     String color;   // 색상
     boolean power;  // 전원상태(on/off)
     int channel;    // 채널
@@ -8,13 +8,9 @@ public class Ex01_Instance {
     void power() {
         power = !power;
     }
-
-    void channelUp() {
-        ++channel;
-    }
-
+    void channelUp() { channel++; }
     void channelDown() {
-        --channel;
+        channel--;
     }
 }
 
@@ -24,5 +20,8 @@ class TvControl {
         tv.channel = 7;
         tv.channelDown();
         System.out.println("현재 채널은 " + tv.channel + " 입니다.");
+        System.out.println(tv.power);
+        tv.power();
+        System.out.println(tv.power);
     }
 }

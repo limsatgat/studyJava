@@ -11,7 +11,7 @@ public class Ex05_StringArray {
         String[] var6 = names;
         int var3 = names.length;
 
-        for(int var4 = 0; var4 < var3; ++var4) {
+        for(int var4 = 0; var4 < var3; var4++) {
             String str = var6[var4];
             System.out.println(str);
         }

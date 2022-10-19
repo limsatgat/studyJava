@@ -1,4 +1,5 @@
 public class Ex05_Constructor {
+    // 생성자의 오류
     public static void main(String[] args) {
         Test first = new Test();
 //        Test2 second = new Test2();
