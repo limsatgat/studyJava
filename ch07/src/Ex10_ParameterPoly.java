@@ -3,50 +3,61 @@ import java.util.Scanner;
 // 매개변수의 다형성
 class CellularPhone {
     String payName;
-    CellularPhone(String payName){
+
+    CellularPhone(String payName) {
         this.payName = payName;
     }
-
-    CellularPhone(){};
 }
 
 class Galaxy extends CellularPhone {
-    Galaxy(){
+    Galaxy() {
         super("삼성페이");
     }
-    public String toString(){
-        return "삼성페이";
+
+    public String toString() {
+        return payName + ", ";
     }
 }
 
 class iPhone extends CellularPhone {
-    iPhone(){
+    iPhone() {
         super("애플페이");
     }
-    public String toString(){
-        return "애플페이";
+
+    public String toString() {
+        return payName;
     }
 }
 
 class User {
-    void use(CellularPhone cp){
+    void payment(Galaxy ga) {
+        System.out.print(ga);
     }
+
+    void payment(iPhone ip) {
+        System.out.print(ip);
+    }
+
+//    void payment(CellularPhone cp){
+//        System.out.print(cp);
+//    }
 }
 
 public class Ex10_ParameterPoly {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Galaxy 와 iPhone 중 결제수단을 정해주세요.");
-
-        User user = new User();
-        user.use(new Galaxy());
-        user.use(new iPhone());
+        System.out.println("결제수단을 선택해주세요 : 페이 / 카드 / 현금");
 
         String pay = sc.next();
-        if(pay.equals("Galaxy")) {
-            System.out.println();
-        } else if (pay.equals("iPhone")) {
-            System.out.println();
+        if (pay.equals("페이")) {
+            System.out.print("선택된 결제 수단은 ");
+            User user = new User();
+            user.payment(new Galaxy());
+            user.payment(new iPhone());
+            System.out.println(" 입니다.");
+            System.out.println("앱을 실행한 상태로 투입구에 부착바랍니다.");
+        } else if (pay.equals("카드") || pay.equals("현금")) {
+            System.out.println("투입구에 넣어주시기 바랍니다.");
         } else {
             System.out.println("잘못 입력하셨습니다.");
         }

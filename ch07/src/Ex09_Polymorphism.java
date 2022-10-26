@@ -5,7 +5,7 @@ class Tv {
     boolean power = true;
 
     void deviceOn() {
-        if(power){
+        if (power) {
             System.out.println("전원을 켰습니다.");
         } else {
             System.out.println("전원을 껐습니다.");
@@ -23,7 +23,7 @@ class SmartTv extends Tv {
     }
 }
 
-class LedTv extends Tv{
+class LedTv extends Tv {
     // SmartTv와 테스트하려고 만들어 둔 클래스
 }
 
@@ -49,11 +49,11 @@ public class Ex09_Polymorphism {
 //        sTTTv.displayCaption("야옹");
 
         //instanceof 연산자
-        if(sTv instanceof Tv){
+        if (sTv instanceof Tv) {
             System.out.println("형변환이 가능합니다.");
         }
-        if(sTv instanceof Object){
+        if (sTv instanceof Object) {
             System.out.println("형변환이 가능합니다.");
         }
-   }
+    }
 }
