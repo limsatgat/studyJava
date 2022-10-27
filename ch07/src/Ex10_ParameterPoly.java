@@ -10,12 +10,13 @@ class CellularPhone {
 }
 
 class Galaxy extends CellularPhone {
+    // 부모클래스의 생성자를 호출
     Galaxy() {
         super("삼성페이");
     }
 
     public String toString() {
-        return payName + ", ";
+        return payName;
     }
 }
 
@@ -47,13 +48,17 @@ public class Ex10_ParameterPoly {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("결제수단을 선택해주세요 : 페이 / 카드 / 현금");
-
         String pay = sc.next();
+
+        User user = new User();
+        Galaxy s20 = new Galaxy();
+        iPhone i13 = new iPhone();
+
         if (pay.equals("페이")) {
             System.out.print("선택된 결제 수단은 ");
-            User user = new User();
-            user.payment(new Galaxy());
-            user.payment(new iPhone());
+            user.payment(s20);
+            System.out.print("와 ");
+            user.payment(i13);
             System.out.println(" 입니다.");
             System.out.println("앱을 실행한 상태로 투입구에 부착바랍니다.");
         } else if (pay.equals("카드") || pay.equals("현금")) {

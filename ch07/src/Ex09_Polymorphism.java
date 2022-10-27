@@ -6,9 +6,9 @@ class Tv {
 
     void deviceOn() {
         if (power) {
-            System.out.println("전원을 켰습니다.");
+            System.out.println("전원켜기");
         } else {
-            System.out.println("전원을 껐습니다.");
+            System.out.println("전원끄기.");
         }
     }
 }
@@ -19,6 +19,14 @@ class SmartTv extends Tv {
     void displayCaption(String text) {
         if (caption) {
             System.out.println(text);
+        }
+    }
+
+    void deviceOn(){
+        if (power){
+            System.out.println("전원을 켰습니다.");
+        } else {
+            System.out.println("전원을 껐습니다.");
         }
     }
 }
@@ -32,10 +40,14 @@ public class Ex09_Polymorphism {
     public static void main(String[] args) {
         // 다형성
 //        Tv tv = new Tv();               // 부모 본인
+        Tv tv = new SmartTv();          // 부모가 자식을
+
         SmartTv sTv = new SmartTv();    // 자식 본인
-//        Tv tv = new SmartTv();          // 부모가 자식을
 //        Smart sTv = new Tv();           // 자식을 부모가
+
 //        LedTv lTv = (LedTv)sTv;       // 관계없는 클ㄹㅐ스끼리는?
+
+/******************************************************************/
 
 //        // 참조타입의 형변환 테스트
 //        Tv ttv = null;
@@ -49,11 +61,11 @@ public class Ex09_Polymorphism {
 //        sTTTv.displayCaption("야옹");
 
         //instanceof 연산자
-        if (sTv instanceof Tv) {
-            System.out.println("형변환이 가능합니다.");
-        }
-        if (sTv instanceof Object) {
-            System.out.println("형변환이 가능합니다.");
-        }
+//        if (sTv instanceof Tv) {
+//            System.out.println("형변환이 가능합니다.");
+//        }
+//        if (sTv instanceof Object) {
+//            System.out.println("형변환이 가능합니다.");
+//        }
     }
 }
