@@ -30,18 +30,32 @@ class iPhone extends CellularPhone {
     }
 }
 
+class TestPhone extends CellularPhone{
+    TestPhone(){
+        super("테스트폰ㅁ");
+    }
+
+    public String toString(){
+        return payName;
+    }
+}
+
 class User {
-    void payment(Galaxy ga) {
-        System.out.print(ga);
-    }
-
-    void payment(iPhone ip) {
-        System.out.print(ip);
-    }
-
-//    void payment(CellularPhone cp){
-//        System.out.print(cp);
+//    void payment(Galaxy ga) {
+//        System.out.print(ga);
 //    }
+//
+//    void payment(iPhone ip) {
+//        System.out.print(ip);
+//    }
+//
+//    void payment(TestPhone t){
+//        System.out.println(t);
+//    }
+
+    void payment(CellularPhone cp){
+        System.out.print(cp);
+    }
 }
 
 public class Ex10_ParameterPoly {
@@ -53,12 +67,14 @@ public class Ex10_ParameterPoly {
         User user = new User();
         Galaxy s20 = new Galaxy();
         iPhone i13 = new iPhone();
+        TestPhone t = new TestPhone();
 
         if (pay.equals("페이")) {
             System.out.print("선택된 결제 수단은 ");
             user.payment(s20);
             System.out.print("와 ");
             user.payment(i13);
+            user.payment(t);
             System.out.println(" 입니다.");
             System.out.println("앱을 실행한 상태로 투입구에 부착바랍니다.");
         } else if (pay.equals("카드") || pay.equals("현금")) {
