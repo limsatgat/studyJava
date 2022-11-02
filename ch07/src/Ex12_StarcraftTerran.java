@@ -1,3 +1,5 @@
+// 인터페이스
+
 // 지상
 interface GroundUnit {
     int x = 0, y = 0;
