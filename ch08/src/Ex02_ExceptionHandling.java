@@ -23,11 +23,11 @@ public class Ex02_ExceptionHandling {
         ex.total(new String[] {"국어", "영어", "수학" });
 */
         Subject s = new Subject();
-        //double[] test = s.test(10.0, 20.0, 30.0, 40.0, 50.0);
-        //System.out.println(Arrays.toString(test));
-//        String[] c = new String[d]{};
-//        s.a(1,2, c);
-//        System.out.println("이 이거 : "+ c[0]);
+//        double[] test = s.test(10.0, 20.0, 30.0, 40.0, 50.0);
+//        System.out.println(Arrays.toString(test));
+        String[] c = new String[]{};
+        s.a(1,2, c);
+        System.out.println("이 이거 : "+ c[0]);
     }
 
 }
