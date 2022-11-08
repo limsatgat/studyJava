@@ -10,7 +10,13 @@ import java.util.Scanner;
 
 public class Birthday2 {
     public static void main(String[] args) {
+        boolean flag = true;
+        while (flag) {
+            flag = new Birthday2().ask();
+        }
+    }
 
+    public boolean ask(){
         Scanner inputValue = new Scanner(System.in);
 
         // 천간, 지지
@@ -20,6 +26,9 @@ public class Birthday2 {
         System.out.println("생년월일 8자리를 입력하면 육십갑자와 요일이 출력됩니다. ex) 1999년1월1일");
         StringBuilder birth = new StringBuilder(inputValue.next());
 
+        // 조건 수정
+        // 1. 입력값은 최소 9, 최대 11
+        // 2. 년, 월, 일 분기처리
         while (birth.length() != 9 || !(birth.substring(4, 5).equals("년") || birth.substring(6, 7).equals("월") || birth.substring(8, 9).equals("일"))) {
             System.out.println("입력값이 바르지 않습니다. ex) 1999년1월1일");
             birth = new StringBuilder(inputValue.next());
@@ -58,5 +67,16 @@ public class Birthday2 {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         String dayOfTheWeek = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.KOREAN);  // 토요일
         System.out.println("귀하께서는 " + heavenGroup[heaven] + earthGroup[earth] + "년 " + dayOfTheWeek + "에 태어나셨습니다.");
+
+        System.out.println("다시 입력하시겠습니까? Y:예, N:아니오");
+        String ask = inputValue.next();
+        System.out.println(ask);
+        if (ask.equals("N")  || ask.equals("아니오")) {
+            System.out.println("질문이 종료됩니다.");
+            inputValue.close();
+            return false;
+        } else {
+            return true;
+        }
     }
 }

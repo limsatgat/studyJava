@@ -2,16 +2,32 @@
 // month, heaven, earth년
 // 1994년 4월 2일 = 토요일, 갑술
 
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Locale;
+import java.util.Scanner;
 
-public class Birthday {
+public class Birthday3 {
     public static void main(String[] args){
         boolean flag = true;
-        while (flag) {
-            flag = new Birthday().question();
+        try {
+            while (flag) {
+                flag = new Birthday3().question();
+            }
+        } catch (InputMismatchException input){
+            System.out.println("숫자 이외의 값이 입력되었습니다.");
+            System.out.println("***********************************");
+            new Birthday3().question();
+        } catch (DateTimeException date){
+            System.out.println("날짜형식에 맞지않는 값이 입력되었습니다.");
+            System.out.println("***********************************");
+            new Birthday3().question();
+        } catch (Exception e){
+            System.out.println("다시 입력바랍니다.");
+            new Birthday3().question();
         }
     }
 
@@ -59,6 +75,7 @@ public class Birthday {
         System.out.println(ask);
         if (ask.equals("N")  || ask.equals("아니오")) {
             System.out.println("질문이 종료됩니다.");
+            inputValue.close();
             return false;
         } else {
             return true;
