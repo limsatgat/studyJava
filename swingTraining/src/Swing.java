@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.lang.String;
 public class Swing extends JFrame {
     public Swing() {
         setTitle("발전하는 임스윙스");
@@ -15,7 +15,7 @@ public class Swing extends JFrame {
         c.setLayout(new FlowLayout());
 
         // 복사된 문자 저장
-
+        StringBuilder textContent = new StringBuilder();
 
         // 텍스트 입력창
         JTextField inputArea = new JTextField("", 50);
@@ -25,15 +25,19 @@ public class Swing extends JFrame {
         // 복사버튼을 누르면 inputArea의 값이 담김
         JButton jClone = new JButton("복사");
         jClone.addActionListener(e -> {
-            inputArea.getText();
+            if(textContent.length() == 0) {
+                textContent.append(inputArea.getText());
+            } else {
+                textContent.setLength(0);
+                textContent.append(inputArea.getText());
+            }
+            JOptionPane.showMessageDialog(null, "복사되었습니다");
         });
-
-        String textArea = inputArea.getText();
 
         // 붙여넣기
         JButton jPaste = new JButton("붙여넣기");
         jPaste.addActionListener(e -> {
-            inputArea.setText(textArea);
+            inputArea.setText(String.valueOf(textContent));
         });
 
         // 삭제버튼
@@ -43,10 +47,10 @@ public class Swing extends JFrame {
         });
 
         // 글바꾸기버튼
-        JButton jChange = new JButton("글바꾸기");
-        jChange.addActionListener(e -> {
-
-        });
+//        JButton jChange = new JButton("글바꾸기");
+//        jChange.addActionListener(e -> {
+//
+//        });
 
         c.add(inputArea);
         c.add(button);
@@ -54,7 +58,7 @@ public class Swing extends JFrame {
         button.add(jClone);
         button.add(jPaste);
         button.add(jCut);
-        button.add(jChange);
+//        button.add(jChange);
 
         // 닫기
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
