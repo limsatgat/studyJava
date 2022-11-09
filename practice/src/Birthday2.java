@@ -71,12 +71,11 @@ public class Birthday2 {
         System.out.println("다시 입력하시겠습니까? Y:예, N:아니오");
         String ask = inputValue.next();
         System.out.println(ask);
-        if (ask.equals("N")  || ask.equals("아니오")) {
-            System.out.println("질문이 종료됩니다.");
-            inputValue.close();
-            return false;
-        } else {
+        if(ask.equalsIgnoreCase("Y") || ask.equals("예")){
             return true;
+        } else {
+            System.out.println("질문이 종료됩니다.");
+            return false;
         }
     }
 }
