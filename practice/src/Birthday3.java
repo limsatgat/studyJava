@@ -34,11 +34,6 @@ public class Birthday3 {
     public boolean question() {
         Scanner inputValue = new Scanner(System.in);
 
-        // 천간, 지지
-//        List<Character> heavenGroup = new ArrayList();
-//        List<Character> v = new Vector();
-//        heavenGroup = v.;
-//        heavenGroup.add();
         char[] heavenGroup = {'경','신','임','계','갑','을','병','정','무','기'};
         char[] earthGroup = {'신','유','술','해','자','축','인','묘','진','사','오','미'};
 
