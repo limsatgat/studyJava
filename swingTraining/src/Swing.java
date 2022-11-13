@@ -1,13 +1,6 @@
-
-import javafx.scene.input.InputMethodTextRun;
-import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
-import jdk.nashorn.internal.scripts.JO;
-
 import javax.swing.*;
 import java.awt.*;
 import java.lang.String;
-import java.sql.Struct;
-import java.util.Locale;
 
 public class Swing extends JFrame {
 
@@ -46,7 +39,7 @@ public class Swing extends JFrame {
         // 복사버튼을 누르면 inputArea의 값이 담김
 //        JButton jClone = new JButton("복사");
         jClone.addActionListener(e -> {
-            if(textContent.length() == 0) {
+            if (textContent.length() == 0) {
                 textContent.append(inputArea.getText());
             } else {
                 textContent.setLength(0);
@@ -70,7 +63,7 @@ public class Swing extends JFrame {
         // 글바꾸기버튼
 //        JButton jChange = new JButton("글바꾸기");
         jChange.addActionListener(e -> {
-            if (inputArea.getText().length() != 0){
+            if (inputArea.getText().length() != 0) {
                 inputText.append(inputArea.getText());
                 ChangeModal.setVisible(true);
             } else {
@@ -78,9 +71,9 @@ public class Swing extends JFrame {
             }
         });
 
-        writeBox.add(inputArea);
         writeBox.add(button);
 
+        button.add(inputArea);
         button.add(jClone);
         button.add(jPaste);
         button.add(jCut);
@@ -97,12 +90,12 @@ public class Swing extends JFrame {
     }
 }
 
-class ChangeDialog extends JDialog{
+class ChangeDialog extends JDialog {
 
     JLabel beforeLabel = new JLabel("변경될 문자");
     JLabel afterLabel = new JLabel("변경할 문자");
 
-    JTextField before = new JTextField("",20);
+    JTextField before = new JTextField("", 20);
     JTextField after = new JTextField("", 20);
 
     JButton allChange = new JButton("전체");
@@ -113,7 +106,7 @@ class ChangeDialog extends JDialog{
 
     String changeText = String.valueOf(inputText);
 
-    ChangeDialog(JFrame frame){
+    ChangeDialog(JFrame frame) {
         super(frame, "글바꾸기", true);
         Container changeBox = getContentPane();
         changeBox.setLayout(new FlowLayout());
@@ -126,30 +119,31 @@ class ChangeDialog extends JDialog{
         add(allChange);
         add(firstChange);
         add(cancel);
-        setBounds(100,100,300,200);
+        setBounds(100, 100, 300, 200);
 
         // 글 변경
         allChange.addActionListener(e -> {
 
             // 넘어온 값을 확인하고 변경해서 넘기기
             // 변경 후에 넘어온 원글 값이랑 맞는지 확인하고 넘기기
-           if (after.getText().length() != 0 && before.getText().length() != 0) {
+            if (after.getText().length() != 0 && before.getText().length() != 0) {
 
-               changeText = String.valueOf(inputText);
+                changeText = String.valueOf(inputText);
 
-               // 기존의 값과 입력 값 확인
-               if (changeText.toLowerCase().contains(before.getText().toLowerCase())){
+                // 기존의 값과 입력 값 확인
+                if (changeText.toLowerCase().contains(before.getText().toLowerCase())) {
 
                     System.out.println(before.getText());
                     System.out.println(after.getText());
 
                     // 일치하면 after.getText() 로 내용변경
-                    changeText = changeText.replace(before.getText() , after.getText());
+                    changeText = changeText.replace(before.getText(), after.getText());
                     System.out.println(changeText);
                     JOptionPane.showMessageDialog(changeBox, "변경되었습니다");
                     ChangeDialog.this.setVisible(false);
                     after.setText("");
                     before.setText("");
+                    JButton.
                 } else {
                     JOptionPane.showMessageDialog(changeBox, "내용이 일치하지 않습니다.");
                 }
@@ -169,14 +163,14 @@ class ChangeDialog extends JDialog{
                 changeText = String.valueOf(inputText);
 
                 // 기존의 값과 입력 값 확인
-                if (changeText.toLowerCase().contains(before.getText().toLowerCase())){
+                if (changeText.toLowerCase().contains(before.getText().toLowerCase())) {
 
                     System.out.println(before.getText());
                     System.out.println(after.getText());
 
                     // 일치하면 after.getText() 로 내용변경
 //                    changeText.replaceAll("\"" + before.getText() + "\"" , "\"" + after.getText() + "\"");
-                    changeText = changeText.replaceFirst(before.getText() , after.getText());
+                    changeText = changeText.replaceFirst(before.getText(), after.getText());
                     System.out.println(changeText);
                     JOptionPane.showMessageDialog(changeBox, "변경되었습니다");
                     ChangeDialog.this.setVisible(false);
