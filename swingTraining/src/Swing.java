@@ -8,6 +8,7 @@ public class Swing extends JFrame {
     StringBuilder textContent = new StringBuilder();
 
     // 입력창
+    static JPanel textArea = new JPanel();
     JTextField inputArea = new JTextField("", 50);
 
     // 버튼 공간과 아이들
@@ -17,7 +18,7 @@ public class Swing extends JFrame {
     JButton jCut = new JButton("삭제");
     JButton jChange = new JButton("글바꾸기");
 
-    // 글바꾸기 할 때 기존 글 저장
+    // 글바꾸기 할 때 기존 글 데이터가 저장되어있는 공간
     static StringBuilder inputText = new StringBuilder();
 
     public Swing() {
@@ -28,16 +29,8 @@ public class Swing extends JFrame {
         writeBox.setLayout(new FlowLayout());
 
         ChangeDialog ChangeModal = new ChangeDialog(this);
-//        // 복사된 문자 저장
-//        StringBuilder textContent = new StringBuilder();
-//
-//        // 텍스트 입력창
-//        JTextField inputArea = new JTextField("", 50);
-
-//        JPanel button = new JPanel();
 
         // 복사버튼을 누르면 inputArea의 값이 담김
-//        JButton jClone = new JButton("복사");
         jClone.addActionListener(e -> {
             if (textContent.length() == 0) {
                 textContent.append(inputArea.getText());
@@ -49,19 +42,16 @@ public class Swing extends JFrame {
         });
 
         // 붙여넣기
-//        JButton jPaste = new JButton("붙여넣기");
         jPaste.addActionListener(e -> {
             inputArea.setText(inputArea.getText() + String.valueOf(textContent));
         });
 
         // 삭제버튼
-//        JButton jCut = new JButton("삭제");
         jCut.addActionListener(e -> {
             inputArea.setText("");
         });
 
         // 글바꾸기버튼
-//        JButton jChange = new JButton("글바꾸기");
         jChange.addActionListener(e -> {
             if (inputArea.getText().length() != 0) {
                 inputText.append(inputArea.getText());
@@ -71,9 +61,10 @@ public class Swing extends JFrame {
             }
         });
 
+        writeBox.add(textArea);
         writeBox.add(button);
 
-        button.add(inputArea);
+        textArea.add(inputArea);
         button.add(jClone);
         button.add(jPaste);
         button.add(jCut);
@@ -132,18 +123,15 @@ class ChangeDialog extends JDialog {
 
                 // 기존의 값과 입력 값 확인
                 if (changeText.toLowerCase().contains(before.getText().toLowerCase())) {
-
-                    System.out.println(before.getText());
-                    System.out.println(after.getText());
-
                     // 일치하면 after.getText() 로 내용변경
                     changeText = changeText.replace(before.getText(), after.getText());
-                    System.out.println(changeText);
                     JOptionPane.showMessageDialog(changeBox, "변경되었습니다");
                     ChangeDialog.this.setVisible(false);
+                    Swing.textArea.revalidate();
+                    Swing.textArea.repaint();
+                    System.out.println(inputText);
                     after.setText("");
                     before.setText("");
-                    JButton.
                 } else {
                     JOptionPane.showMessageDialog(changeBox, "내용이 일치하지 않습니다.");
                 }
@@ -164,15 +152,11 @@ class ChangeDialog extends JDialog {
 
                 // 기존의 값과 입력 값 확인
                 if (changeText.toLowerCase().contains(before.getText().toLowerCase())) {
-
-                    System.out.println(before.getText());
-                    System.out.println(after.getText());
-
                     // 일치하면 after.getText() 로 내용변경
-//                    changeText.replaceAll("\"" + before.getText() + "\"" , "\"" + after.getText() + "\"");
                     changeText = changeText.replaceFirst(before.getText(), after.getText());
-                    System.out.println(changeText);
                     JOptionPane.showMessageDialog(changeBox, "변경되었습니다");
+                    inputText = new StringBuilder(changeText);
+                    Swing.textArea.repaint();
                     ChangeDialog.this.setVisible(false);
                     after.setText("");
                     before.setText("");
