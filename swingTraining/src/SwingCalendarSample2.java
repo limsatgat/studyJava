@@ -42,7 +42,9 @@ public class SwingCalendarSample2 extends JFrame implements ItemListener, Action
         super("달력"); //super : 부모클래스로부터 상속받은 메소드를 자식클래스에 참조해서 사용하는 변수
         date = Calendar.getInstance();//현재의 날짜 시간 객체 생성 + 객체를 받아온다.
         year = date.get(Calendar.YEAR); // 캘린더에서 년을 받아와서 미리생성해놓은 year에 주입한다.
+        System.out.println(year);
         month = date.get(Calendar.MONTH) + 1; //월을 받아와서 month에 대입한다. +1을 하는 이유는 0~11이라
+        System.out.println(month);
 
         //상단
         selectPane.setBackground(new Color(150, 200, 200)); //백그라운드의 배경을 주입한다.
@@ -88,8 +90,10 @@ public class SwingCalendarSample2 extends JFrame implements ItemListener, Action
         //요일
         date.set(year, month - 1, 1); //date를 세팅하는데, 일(day)를 1로 세팅한다.
         int week = date.get(Calendar.DAY_OF_WEEK); //DAY_OF_WEEK는 일월화수목금토이며 이 데이터를 받아와서 week에 넣는다.
+//        System.out.println(week);
         //마지막날
         int lastDay = date.getActualMaximum(Calendar.DATE); //getActualMaximum 는 날짜가 셋팅 된 Calender 가 가질수 있는 값
+//        System.out.println(lastDay);
 //        int lastDay = date.getMaximum(Calendar.DATE); //getMaximum 는 Calender 자체가 최대로 가질수 있는 값 - > 모든 월의 마지막날이 31일로 출력됨
         //마지막날을 불러온다.
         //공백
@@ -103,6 +107,7 @@ public class SwingCalendarSample2 extends JFrame implements ItemListener, Action
             //출력하는 날짜에 대한 요일
             date.set(Calendar.DATE, day); // 19 ->1
             int w = date.get(Calendar.DAY_OF_WEEK); //요일
+            System.out.println(w);
             if (w == 1) lbl.setForeground(Color.red); //일월화수목금토 (1~7) 1은 일요일이므로 일요일에 red색깔
             if (w == 7) lbl.setForeground(Color.blue); //7이므로 blue색깔
             dayPane.add(lbl);
@@ -155,15 +160,16 @@ public class SwingCalendarSample2 extends JFrame implements ItemListener, Action
         if (obj == prevBtn) {//이전버튼을 눌렀을때
             //이전월을 눌렀을때
             prevMonth(); //이전버튼메소드호출
-            setDayReset(); //Day를 Reset해주는 메소드 호출
+            buttonClickEventThisCalendarResetMethod(); //Day를 Reset해주는 메소드 호출
         } else if (obj == nextBtn) { //이후 버튼을 눌렀을때
             //다음월을 눌렀을떄
             nextMonth(); //위와동
-            setDayReset(); //위와동
+            buttonClickEventThisCalendarResetMethod(); //위와동
         }
     }
 
-    private void setDayReset() {
+    /* 이전, 다음 버튼 클릭시 현재 보이는 날짜패널 갱신되는 메소드 */
+    private void buttonClickEventThisCalendarResetMethod() {
         //년월 이벤트 등록해제
         yearCombo.removeItemListener(this); //등록이벤트를 해제시켜주고
         monthCombo.removeItemListener(this);
