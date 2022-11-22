@@ -3,9 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.Month;
+import java.time.*;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -35,6 +33,7 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     JPanel dayPane = new JPanel(new GridLayout(0, 7));
 
     LocalDate localDate = LocalDate.now();
+
     int year;
     Month month;
 
@@ -93,13 +92,20 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
         for (int j = 1; j <= lastDay; j++){
             JLabel lbl = new JLabel(String.valueOf(j), JLabel.CENTER);
 //            System.out.println(lbl);
-            int weekend = localDate.getDayOfWeek();
-            System.out.println(weekend);
-//            if (weekend == 1) {
-//                lbl.setForeground(Color.red);
-//            } else if (weekend == 7){
-//                lbl.setForeground(Color.blue);
-//            }
+            DayOfWeek weekend = localDate.getDayOfWeek();   // 현재 요일
+            weekend = weekend.plus(j-1);
+//            System.out.println(weekend);
+
+            switch (String.valueOf(weekend)) {
+                case "SUNDAY":
+//                    System.out.println(0);
+                    lbl.setForeground(Color.red);
+                    break;
+                case "SATURDAY":
+//                    System.out.println(6);
+                    lbl.setForeground(Color.blue);
+                    break;
+            }
             dayPane.add(lbl);
         }
     }
@@ -131,32 +137,71 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
         for (int i =1; i<= 12; i++){
             monthComboBox.addItem(i);
         }
-        monthComboBox.setSelectedItem(month);
+        monthComboBox.setSelectedItem(month.getValue());
     }
 
     // 날짜설정 콤보박스 이벤트
     public void itemStateChanged(ItemEvent e){
+        year = (int) yearComboBox.getSelectedItem();
+        month = Month.of((int) monthComboBox.getSelectedItem());
 
+        dayPane.setVisible(false);
+        dayPane.removeAll();
+        setDay();
+        dayPane.setVisible(true);
     }
 
     // 날짜이동 버튼 이벤트
     public void actionPerformed(ActionEvent ae){
-
+        Object obj = ae.getSource();
+        if(obj == prevBtn){
+            prevMonth();
+            setDayReset();
+        } else if (obj == nextBtn){
+            nextMonth();
+            setDayReset();
+        }
     }
 
     // 콤보박스로 년/월 설정시 초기화
     private void setDayReset(){
+        yearComboBox.removeItemListener(this);
+        monthComboBox.removeItemListener(this);
 
-    }
+        yearComboBox.setSelectedItem(year);
+        monthComboBox.setSelectedItem(month);
 
-    // 월 이동(다음으로)
-    public void nextMonth(){
+        dayPane.setVisible(false);
+        dayPane.removeAll();
+        setDay();
+        dayPane.setVisible(true);
 
+        yearComboBox.addItemListener(this);
+        monthComboBox.addItemListener(this);
     }
 
     // 월 이동(이전으로)
     public void prevMonth(){
+        if (String.valueOf(month) == "JANUARY"){
+            System.out.println("1월이면 12월로 가자");
+            year--;
+            month.plus(1);
+        } else {
+            System.out.println("실패");
+            month.minus(1);
+        }
+    }
 
+    // 월 이동(다음으로)
+    public void nextMonth(){
+        if (String.valueOf(month) == "DECEMBER"){
+            System.out.println("12월이면 1월로 가자");
+            year++;
+            month = month.minus(1);
+        } else {
+            System.out.println("실패");
+            month = month.plus(1);
+        }
     }
 
     public static void main(String[] args) {

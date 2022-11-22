@@ -1,0 +1,21 @@
+
+^
+java:S6208"CMerge the previous cases into this one using comma-separated label.(ÌÊëÎüÿÿÿÿ
+Y
+java:S6208"CMerge the previous cases into this one using comma-separated label.(ôŸ¯
+^
+java:S6208"CMerge the previous cases into this one using comma-separated label.(—Í×©øÿÿÿÿ
+Y
+java:S6208"CMerge the previous cases into this one using comma-separated label.(ùÃŞ„
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ìÌÌ±
+0
+java:S1220""Move this file to a named package.
+S	java:S106"9Replace this use of System.out or System.err by a logger.(‰íöÍıÿÿÿÿ
+f	java:S128"LEnd this switch case with an unconditional break, return or throw statement.(—Í×©øÿÿÿÿ
+a	java:S128"LEnd this switch case with an unconditional break, return or throw statement.(ôŸ¯
+m	java:S128"LEnd this switch case with an unconditional break, return or throw statement.(ÌÊëÎüÿÿÿÿ8£ºüÏÆ0
+<	java:S131""Add a default case to this switch.(¹Ë”Óùÿÿÿÿ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ÈìÍØ
+M	java:S106"9Replace this use of System.out or System.err by a logger.(¤œïL
+S	java:S106"9Replace this use of System.out or System.err by a logger.(©¡—¬ıÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(›ôúÿÿÿÿ
