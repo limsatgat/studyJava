@@ -32,7 +32,7 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     String[] title = {"일", "월", "화", "수", "목", "금", "토"};
     JPanel dayPane = new JPanel(new GridLayout(0, 7));
 
-    LocalDate localDate = LocalDate.now();
+    LocalDate localDate;
 
     int year;
     Month month;
@@ -40,7 +40,13 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     // 생성자
     public CalendarSwing(){
         super("캘린더");
+        // 2022 11 27
+        localDate = LocalDate.now();
+
+        // 2022
         year = localDate.getYear();
+
+        // NOVEMBER
         month = localDate.getMonth();
 
         //상단바
@@ -76,11 +82,14 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     // 날짜 세팅
     public void setDay(){
         // 요일 세팅
-        localDate.of(year, month, 1);
+        localDate = localDate.of(year, month, 1);
+//        System.out.println(localDate.of(year, month, 1));
+
+        // sunday
         DayOfWeek week = localDate.getDayOfWeek();
-//        System.out.println(week);
+
+        // 이번달의 마지막 일/ 30
         int lastDay = localDate.lengthOfMonth();
-//        System.out.println(lastDay);
 
         // 공백
         for (int i=0; i<week.getValue(); i++){
@@ -97,10 +106,12 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
 //            System.out.println(weekend);
 
             switch (String.valueOf(weekend)) {
+                // 일요일일 때 빨강
                 case "SUNDAY":
 //                    System.out.println(0);
                     lbl.setForeground(Color.red);
                     break;
+                // 토요일일 때 파랑
                 case "SATURDAY":
 //                    System.out.println(6);
                     lbl.setForeground(Color.blue);
@@ -115,8 +126,10 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
         for (int i = 0; i < title.length; i++){
             JLabel dayOfWeek = new JLabel(title[i], JLabel.CENTER);
 //            System.out.println(dayOfWeek);
+            // 일요일일 때 빨강
             if (i == 0) {
                 dayOfWeek.setForeground(Color.red);
+            // 토요일일 때 파랑
             } else if (i == 6) {
                 dayOfWeek.setForeground(Color.blue);
             }
@@ -132,7 +145,7 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
         yearComboBox.setSelectedItem(year);
     }
 
-    // 월 세팅
+    // 월 세팅 (1~12)
     public void setMonth(){
         for (int i =1; i<= 12; i++){
             monthComboBox.addItem(i);
@@ -143,7 +156,7 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     // 날짜설정 콤보박스 이벤트
     public void itemStateChanged(ItemEvent e){
         year = (int) yearComboBox.getSelectedItem();
-        month = Month.of((int) monthComboBox.getSelectedItem());
+        month = Month.of(Integer.parseInt(String.valueOf(monthComboBox.getSelectedItem())));
 
         dayPane.setVisible(false);
         dayPane.removeAll();
@@ -153,15 +166,28 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
 
     // 날짜이동 버튼 이벤트
     public void actionPerformed(ActionEvent ae){
-        Object obj = ae.getSource();
-        if(obj == prevBtn){
-            prevMonth();
-            setDayReset();
-        } else if (obj == nextBtn){
-            nextMonth();
-            setDayReset();
+        String moveCal = ae.getActionCommand();
+//        System.out.println(moveCal);
+        switch (moveCal){
+            case "◀" :
+               prevMonth();
+               setDayReset();
+               break;
+            case "▶" :
+                nextMonth();
+                setDayReset();
+                break;
+//        Object obj = ae.getSource();
+//        if(obj == prevBtn){
+//            prevMonth();
+//            setDayReset();
+//        } else if (obj == nextBtn){
+//            nextMonth();
+//            setDayReset();
         }
     }
+
+
 
     // 콤보박스로 년/월 설정시 초기화
     private void setDayReset(){
@@ -169,7 +195,9 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
         monthComboBox.removeItemListener(this);
 
         yearComboBox.setSelectedItem(year);
-        monthComboBox.setSelectedItem(month);
+//        System.out.println(year);
+        monthComboBox.setSelectedItem(month.getValue());
+//        System.out.println(month);
 
         dayPane.setVisible(false);
         dayPane.removeAll();
@@ -182,25 +210,20 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
 
     // 월 이동(이전으로)
     public void prevMonth(){
+        month = month.minus(1);
+//        System.out.println(month.minus(1));
+
         if (String.valueOf(month) == "JANUARY"){
-            System.out.println("1월이면 12월로 가자");
             year--;
-            month.plus(1);
-        } else {
-            System.out.println("실패");
-            month.minus(1);
         }
     }
 
     // 월 이동(다음으로)
     public void nextMonth(){
-        if (String.valueOf(month) == "DECEMBER"){
-            System.out.println("12월이면 1월로 가자");
+        month = month.plus(1);
+
+        if (String.valueOf(month) == "JANUARY"){
             year++;
-            month = month.minus(1);
-        } else {
-            System.out.println("실패");
-            month = month.plus(1);
         }
     }
 
