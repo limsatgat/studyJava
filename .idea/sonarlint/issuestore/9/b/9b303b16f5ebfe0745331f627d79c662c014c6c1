@@ -1,0 +1,17 @@
+
+0
+java:S1220""Move this file to a named package.
+c
+java:S2095œ"LUse try-with-resources or close this "BufferedWriter" in a "finally" clause.(ù»ı
+c
+java:S2095ˆ"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ãÈˆ¦
+A
+java:S1659"&Declare "editMenu" on a separate line.(ÔĞˆüÿÿÿÿ
+`
+java:S1659"EDeclare "openItem" and all following declarations on a separate line.(Œ™¿Öùÿÿÿÿ
+_
+java:S1659"DDeclare "cutItem" and all following declarations on a separate line.(œÈıóşÿÿÿÿ
+Q
+java:S1874{"6Remove this use of "toLocaleString"; it is deprecated.(Ú‰Å¹üÿÿÿÿ
+O	java:S106„"9Replace this use of System.out or System.err by a logger.(§‚ƒú
+O	java:S106™"9Replace this use of System.out or System.err by a logger.(§‚ƒú

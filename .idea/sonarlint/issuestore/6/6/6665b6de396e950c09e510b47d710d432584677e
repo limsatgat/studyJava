@@ -1,0 +1,10 @@
+
+f	java:S1171"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(––Íƒ
+0
+java:S1220""Move this file to a named package.
+L
+java:S1905"1Remove this unnecessary cast to "WindowListener".(ã¯ó³üÿÿÿÿ
+T
+java:S18541">Remove this useless assignment to local variable "ScrollPane".(––Íƒ
+E
+java:S14811"/Remove this unused "ScrollPane" local variable.(––Íƒ
