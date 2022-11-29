@@ -5,11 +5,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.time.*;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class CalendarSwing extends JFrame implements ItemListener, ActionListener {
 
@@ -38,7 +34,7 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     Month month;
 
     // 생성자
-    public CalendarSwing(){
+    public CalendarSwing() {
         super("캘린더");
         // 2022 11 27
         localDate = LocalDate.now();
@@ -80,7 +76,8 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     }
 
     // 날짜 세팅
-    public void setDay(){
+    public void setDay() {
+
         // 요일 세팅
         localDate = localDate.of(year, month, 1);
 //        System.out.println(localDate.of(year, month, 1));
@@ -92,44 +89,51 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
         int lastDay = localDate.lengthOfMonth();
 
         // 공백
-        for (int i=0; i<week.getValue(); i++){
+        for (int i = 0; i < week.getValue(); i++) {
             JLabel empty = new JLabel(" ");
             dayPane.add(empty);
         }
 
+        // day 메모장
+        NoteBook noteBook = new NoteBook(this);
+
         // 날짜추가 및 휴무일 지정
-        for (int j = 1; j <= lastDay; j++){
-            JLabel lbl = new JLabel(String.valueOf(j), JLabel.CENTER);
+        for (int j = 1; j <= lastDay; j++) {
+            JButton day = new JButton(String.valueOf(j));
 //            System.out.println(lbl);
             DayOfWeek weekend = localDate.getDayOfWeek();   // 현재 요일
-            weekend = weekend.plus(j-1);
+            weekend = weekend.plus(j - 1);
 //            System.out.println(weekend);
 
             switch (String.valueOf(weekend)) {
                 // 일요일일 때 빨강
                 case "SUNDAY":
 //                    System.out.println(0);
-                    lbl.setForeground(Color.red);
+                    day.setForeground(Color.red);
                     break;
                 // 토요일일 때 파랑
                 case "SATURDAY":
 //                    System.out.println(6);
-                    lbl.setForeground(Color.blue);
+                    day.setForeground(Color.blue);
                     break;
             }
-            dayPane.add(lbl);
+            dayPane.add(day);
+
+            day.addActionListener(e -> {
+                noteBook.setVisible(true);
+            });
         }
     }
 
     // 요일세팅 (월,화,수,목,금,토,일) 및 휴무일 지정
-    public void setCalendarTitle(){
-        for (int i = 0; i < title.length; i++){
+    public void setCalendarTitle() {
+        for (int i = 0; i < title.length; i++) {
             JLabel dayOfWeek = new JLabel(title[i], JLabel.CENTER);
 //            System.out.println(dayOfWeek);
             // 일요일일 때 빨강
             if (i == 0) {
                 dayOfWeek.setForeground(Color.red);
-            // 토요일일 때 파랑
+                // 토요일일 때 파랑
             } else if (i == 6) {
                 dayOfWeek.setForeground(Color.blue);
             }
@@ -138,23 +142,23 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     }
 
     // 년도 세팅
-    public void setYear(){
-        for (int i = year - 52; i < year + 28; i++){
+    public void setYear() {
+        for (int i = year - 52; i < year + 28; i++) {
             yearComboBox.addItem(i);
         }
         yearComboBox.setSelectedItem(year);
     }
 
     // 월 세팅 (1~12)
-    public void setMonth(){
-        for (int i =1; i<= 12; i++){
+    public void setMonth() {
+        for (int i = 1; i <= 12; i++) {
             monthComboBox.addItem(i);
         }
         monthComboBox.setSelectedItem(month.getValue());
     }
 
     // 날짜설정 콤보박스 이벤트
-    public void itemStateChanged(ItemEvent e){
+    public void itemStateChanged(ItemEvent e) {
         year = (int) yearComboBox.getSelectedItem();
         month = Month.of(Integer.parseInt(String.valueOf(monthComboBox.getSelectedItem())));
 
@@ -165,32 +169,24 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     }
 
     // 날짜이동 버튼 이벤트
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed(ActionEvent ae) {
         String moveCal = ae.getActionCommand();
 //        System.out.println(moveCal);
-        switch (moveCal){
-            case "◀" :
-               prevMonth();
-               setDayReset();
-               break;
-            case "▶" :
+        switch (moveCal) {
+            case "◀":
+                prevMonth();
+                setDayReset();
+                break;
+            case "▶":
                 nextMonth();
                 setDayReset();
                 break;
-//        Object obj = ae.getSource();
-//        if(obj == prevBtn){
-//            prevMonth();
-//            setDayReset();
-//        } else if (obj == nextBtn){
-//            nextMonth();
-//            setDayReset();
         }
     }
 
 
-
     // 콤보박스로 년/월 설정시 초기화
-    private void setDayReset(){
+    private void setDayReset() {
         yearComboBox.removeItemListener(this);
         monthComboBox.removeItemListener(this);
 
@@ -209,24 +205,55 @@ public class CalendarSwing extends JFrame implements ItemListener, ActionListene
     }
 
     // 월 이동(이전으로)
-    public void prevMonth(){
+    public void prevMonth() {
         month = month.minus(1);
 //        System.out.println(month.minus(1));
 
-        if (String.valueOf(month) == "JANUARY"){
+        if (String.valueOf(month) == "JANUARY") {
             year--;
         }
     }
 
     // 월 이동(다음으로)
-    public void nextMonth(){
+    public void nextMonth() {
         month = month.plus(1);
 
-        if (String.valueOf(month) == "JANUARY"){
+        if (String.valueOf(month) == "JANUARY") {
             year++;
         }
     }
 
+    class NoteBook extends JDialog {
+
+        JTextField inputText = new JTextField("", 20);
+        JButton checkBtn = new JButton("확인");
+        JButton cancelBtn = new JButton("취소");
+
+        NoteBook(JFrame frame) {
+            super(frame, "메모하기", true);
+            Container changeBox = getContentPane();
+            changeBox.setLayout(new FlowLayout());
+
+            add(inputText);
+            add(checkBtn);
+            add(cancelBtn);
+            setBounds(100, 100, 300, 200);
+
+            checkBtn.addActionListener(e -> {
+                if (inputText.getText().length() != 0){
+                    JOptionPane.showMessageDialog(changeBox, "입력되었습니다.");
+                    NoteBook.this.setVisible(false);
+                }
+            });
+
+            cancelBtn.addActionListener(e -> {
+                NoteBook.this.setVisible(false);
+                inputText.revalidate();
+                inputText.repaint();
+                inputText.setText("");
+            });
+        }
+    }
     public static void main(String[] args) {
         new CalendarSwing();
     }
